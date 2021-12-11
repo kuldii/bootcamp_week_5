@@ -1,22 +1,23 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
-import 'package:review_materi/app/data/models/user_model.dart';
-import 'package:review_materi/app/data/providers/user_provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomeController extends GetxController {
-  RxList<User> alluser = List<User>.empty().obs;
+  final ImagePicker _picker = ImagePicker();
 
-  Future<void> getData(int page) async {
-    UserProvider userProv = UserProvider();
+  File? imageGallery;
 
-    List<User>? data = await userProv.getAllUsers(page);
-
-    if (data != null) {
-      alluser.clear();
-      data.forEach((element) {
-        alluser.add(element);
-      });
-
-      alluser.refresh();
+  ambilGambar() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      imageGallery = File(image.path);
+      update();
     }
+  }
+
+  reset() {
+    imageGallery = null;
+    update();
   }
 }

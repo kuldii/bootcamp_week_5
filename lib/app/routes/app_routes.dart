@@ -5,10 +5,8 @@ abstract class Routes {
   Routes._();
 
   static const HOME = _Paths.HOME;
-  static const DETAIL_USER = _Paths.DETAIL_USER;
 }
 
 abstract class _Paths {
   static const HOME = '/home';
-  static const DETAIL_USER = '/detail-user';
 }
